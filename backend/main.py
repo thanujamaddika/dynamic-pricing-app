@@ -14,6 +14,10 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import uuid as uuid_lib
 import datetime as dt
+from dotenv import load_dotenv   # ✅ ADD THIS
+
+# Load environment variables
+load_dotenv()   # ✅ IMPORTANT
 
 executor = ThreadPoolExecutor(max_workers=5)
 
@@ -41,8 +45,8 @@ FRONTEND_URL = os.environ.get(
     "http://localhost:5173"
 )
 
-# Secure API key loading
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+# ✅ Secure API key loading (FIXED)
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 if not GROQ_API_KEY:
     raise ValueError("GROQ_API_KEY environment variable is missing")
@@ -52,7 +56,6 @@ client = Groq(api_key=GROQ_API_KEY)
 # Price history database
 db = TinyDB("price_history.json")
 prices_table = db.table("prices")
-
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/119.0.0.0 Safari/537.36",
