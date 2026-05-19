@@ -29,15 +29,29 @@ app.add_middleware(
 
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
-ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"]
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:5173")
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "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")
+ALLOWED_TYPES = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+]
+
+FRONTEND_URL = os.environ.get(
+    "FRONTEND_URL",
+    "http://localhost:5173"
+)
+
+# Secure API key loading
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
+
+if not GROQ_API_KEY:
+    raise ValueError("GROQ_API_KEY environment variable is missing")
+
 client = Groq(api_key=GROQ_API_KEY)
 
 # Price history database
-db = TinyDB('price_history.json')
-prices_table = db.table('prices')
+db = TinyDB("price_history.json")
+prices_table = db.table("prices")
 
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
