@@ -1,0 +1,45 @@
+
+# ======================
+# ENV FILES (CRITICAL)
+# ======================
+.env
+backend/.env
+
+# ======================
+# PYTHON
+# ======================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+backend/venv/
+
+# ======================
+# NODE / FRONTEND
+# ======================
+node_modules/
+dist/
+build/
+.vite/
+
+# ======================
+# LOGS
+# ======================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ======================
+# IDE / SYSTEM FILES
+# ======================
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
