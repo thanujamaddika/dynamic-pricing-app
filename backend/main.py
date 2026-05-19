@@ -14,10 +14,6 @@ import asyncio
 from concurrent.futures import ThreadPoolExecutor
 import uuid as uuid_lib
 import datetime as dt
-from dotenv import load_dotenv   # ✅ ADD THIS
-
-# Load environment variables
-load_dotenv()   # ✅ IMPORTANT
 
 executor = ThreadPoolExecutor(max_workers=5)
 
@@ -34,23 +30,10 @@ app.add_middleware(
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-ALLOWED_TYPES = [
-    "image/jpeg",
-    "image/png",
-    "image/webp"
-]
-
-FRONTEND_URL = os.environ.get(
-    "FRONTEND_URL",
-    "http://localhost:5173"
-)
-
-# ✅ Secure API key loading (FIXED)
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 if not GROQ_API_KEY:
     raise ValueError("GROQ_API_KEY environment variable is missing")
-
 client = Groq(api_key=GROQ_API_KEY)
 
 # Price history database
